@@ -484,6 +484,10 @@ ip4_input_accept(struct netif *netif)
 err_t
 ip4_input(struct pbuf *p, struct netif *inp)
 {
+  if (input_cb(p, inp) != ERR_IF)
+    {
+      return ERR_OK;
+    }
 #if ESP_LWIP && IP_NAPT
   struct ip_hdr *iphdr;
 #else
