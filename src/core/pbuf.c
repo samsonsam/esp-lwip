@@ -526,8 +526,6 @@ pbuf_add_header_impl(struct pbuf *p, size_t header_size_increment, u8_t force)
   p->payload = payload;
   p->len = (u16_t)(p->len + increment_magnitude);
   p->tot_len = (u16_t)(p->tot_len + increment_magnitude);
-
-
   return 0;
 }
 
