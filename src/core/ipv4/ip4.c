@@ -64,9 +64,7 @@
 #include LWIP_HOOK_FILENAME
 #endif
 
-#ifdef CONFIG_ESP_MESH_FORWARD
 #include "bridge.h"
-#endif
 
 /** Set this to 0 in the rare case of wanting to call an extra function to
  * generate the IP checksum (in contrast to calculating it on-the-fly). */
@@ -760,13 +758,12 @@ err_t ip4_input(struct pbuf *p, struct netif *inp)
     }
   }
 
-  #ifdef CONFIG_ESP_MESH_FORWARD
   // if sending over mesh succeded stop handling it by lwip
   if (bridge_ip4_output(p, inp) == ERR_OK)
   {
     return ERR_OK;
   }
-  #endif
+
 
   /* packet not for us? */
   if (netif == NULL)
